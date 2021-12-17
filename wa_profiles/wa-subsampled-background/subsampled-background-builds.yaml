@@ -30,26 +30,26 @@ conda_environment: "workflow/envs/nextstrain.yaml"
 
 # Define custom rules
 custom_rules:
-  - wa_profiles/wa/add_to_builds.smk
+  - wa_ncov_profile/wa_profiles/wa/add_to_builds.smk
 
 # Define custom auspice configuration to enable frequencies.
 # Define subsclades.
 files:
-  auspice_config: "wa_profiles/wa/auspice_config.json"
+  auspice_config: "wa_ncov_profile/wa_profiles/wa/auspice_config.json"
 
 # Define WA builds.
 builds:
   wa_two_mon:
     title: "Washington-focused SARS-CoV-2 genomic analysis: Past two months"
-    colors: wa_profiles/wa/colors.tsv
-    description: wa_profiles/wa/descriptions/two-months_description.md
+    colors: wa_ncov_profile/wa_profiles/wa/colors.tsv
+    description: wa_ncov_profile/wa_profiles/wa/descriptions/two-months_description.md
     division: Washington
     subsampling_scheme: two-month-priority
 
   wa_four_mon:
     title: "Washington-focused SARS-CoV-2 genomic analysis: Past four months"
-    colors: wa_profiles/wa/colors.tsv
-    description: wa_profiles/wa/descriptions/four-months_description.md
+    colors: wa_ncov_profile/wa_profiles/wa/colors.tsv
+    description: wa_ncov_profile/wa_profiles/wa/descriptions/four-months_description.md
     division: Washington
     subsampling_scheme: four-month-priority
 
