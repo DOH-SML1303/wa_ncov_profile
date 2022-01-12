@@ -98,3 +98,8 @@ refine:
 
 # skip_travel_history_adjustment
 skip_travel_history_adjustment: true
+
+# mask sites in genomes
+# These are 1-indexed coordinates of sites that have been identified as prone to sequencing errors
+mask:
+  mask_sites: "21987 21846"
