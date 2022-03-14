@@ -12,9 +12,12 @@ inputs:
   - name: wa-seq04
     metadata: "data/wa-sequences04.tar"
     sequences: "data/wa-sequences04.tar"
-  - name: wa-seq05
-    metadata: "data/wa-sequences05.tar"
-    sequences: "data/wa-sequences05.tar"
+#  - name: wa-seq05
+#    metadata: "data/wa-sequences05.tar"
+#    sequences: "data/wa-sequences05.tar"
+#  - name: wa-seq06
+#    metadata: "data/wa-sequences06.tar"
+#    sequences: "data/wa-sequences06.tar"
   - name: contextual
     metadata: "data/hcov_north-america.tar.gz"
     sequences: "data/hcov_north-america.tar.gz"
@@ -78,10 +81,10 @@ subsampling:
     local-focus:
       min_date: --min-date {earliest_date}
       query: --query "(country == 'USA' & division == '{division}')"
-      max_sequences: 19000
+      max_sequences: 17000
     # Included to accurately reconstruct # of introductions.
     contextual-proximity:
-      max_sequences: 1500
+      max_sequences: 1000
       query: --query "contextual == 'yes'"
       priorities:
         type: proximity
@@ -92,14 +95,12 @@ subsampling:
       group_by: "month year"
       query: --query "contextual == 'yes'"
 
-# This change tells TreeTime to estimate a constant coalescent rate for the tree instead of a piecewise linear rate (i.e., the “skyline” estimation).
-refine:
-  coalescent: opt
-
-# skip_travel_history_adjustment
-skip_travel_history_adjustment: true
 
 # mask sites in genomes
 # These are 1-indexed coordinates of sites that have been identified as prone to sequencing errors
 mask:
   mask_sites: "21987 21846"
+
+cluster:
+    min_tips: 5
+    group_by: location
