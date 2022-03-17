@@ -1,26 +1,32 @@
+# These parameters are only used by the `export_for_nextstrain` rule and shouldn't need to be modified.
+# To modify the s3 _source_ bucket, specify this directly in the `inputs` section of the config.
+# P.S. These are intentionally set as top-level keys as this allows command-line overrides.
+S3_DST_BUCKET: "bucket-location/ncov/data"
+S3_DST_COMPRESSION: "gz"
+S3_DST_ORIGINS: ["wa-seq"]
+upload:
+  - build-files
+
 # Update input location as needed.
 inputs:
   - name: wa-seq01
-    metadata: "data/wa-sequences01.tar"
-    sequences: "data/wa-sequences01.tar"
+    metadata: "s3://bucket-location/ncov/data/wa-sequences01.tar"
+    sequences: "s3://bucket-location/ncov/data/wa-sequences01.tar"
   - name: wa-seq02
-    metadata: "data/wa-sequences02.tar"
-    sequences: "data/wa-sequences02.tar"
+    metadata: "s3://bucket-location/ncov/data/wa-sequences02.tar"
+    sequences: "s3://bucket-location/ncov/data/wa-sequences02.tar"
   - name: wa-seq03
-    metadata: "data/wa-sequences03.tar"
-    sequences: "data/wa-sequences03.tar"
+    metadata: "s3://bucket-location/ncov/data/wa-sequences03.tar"
+    sequences: "s3://bucket-location/ncov/data/wa-sequences03.tar"
   - name: wa-seq04
-    metadata: "data/wa-sequences04.tar"
-    sequences: "data/wa-sequences04.tar"
+    metadata: "s3://bucket-location/ncov/data/wa-sequences04.tar"
+    sequences: "s3://bucket-location/ncov/data/wa-sequences04.tar"
 #  - name: wa-seq05
-#    metadata: "data/wa-sequences05.tar"
-#    sequences: "data/wa-sequences05.tar"
-#  - name: wa-seq06
-#    metadata: "data/wa-sequences06.tar"
-#    sequences: "data/wa-sequences06.tar"
+#    metadata: "s3://bucket-location/ncov/data/wa-sequences05.tar"
+#    sequences: "s3://bucket-location/ncov/data/wa-sequences05.tar"
   - name: contextual
-    metadata: "data/hcov_north-america.tar.gz"
-    sequences: "data/hcov_north-america.tar.gz"
+    metadata: "s3://bucket-location/ncov/data/hcov_north-america.tar.gz"
+    sequences: "s3://bucket-location/ncov/data/hcov_north-america.tar.gz"
   - name: references
     metadata: "data/references_metadata.tsv"
     sequences: "data/references_sequences.fasta"
