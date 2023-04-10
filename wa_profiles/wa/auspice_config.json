@@ -1,9 +1,14 @@
 {
-  "build_url": "https://github.com/stephlunn/ncov-wa-build/",
+  "build_url": "https://github.com/DOH-SML1303/wa_ncov_profile",
   "maintainers": [
-    {"name": "Steph Lunn, MPH, MS", "url": "https://github.com/stephlunn"}
+    {"name": "Steph Lunn, MPH, MS", "url": "https://github.com/doh-sml1303"}
   ],
   "colorings": [
+    {
+      "key": "County",
+      "title": "County",
+      "type": "categorical"
+    },
     {
       "key": "location",
       "title": "Location",
@@ -28,6 +33,16 @@
       "key": "emerging_lineage",
       "title": "Emerging Lineage",
       "type": "categorical"
+    },
+    {
+      "key": "immune_escape",
+      "title": "Immune Escape vs BA.2",
+      "type": "continuous"
+    },
+    {
+      "key": "ace2_binding",
+      "title": "ACE2 binding vs BA.2",
+      "type": "continuous"
     },
     {
       "key": "pango_lineage",
@@ -65,6 +80,16 @@
       "type": "categorical"
     },
     {
+      "key": "age",
+      "title": "Age",
+      "type": "continuous"
+    },
+    {
+      "key": "sex",
+      "title": "Sex",
+      "type": "categorical"
+    },
+    {
       "key": "originating_lab",
       "title": "Originating Lab",
       "type": "categorical"
@@ -88,20 +113,50 @@
       "type": "categorical"
     },
     {
-  "key": "country_exposure",
-  "title": "Country of Exposure",
-  "type": "categorical"
-},
-{
-  "key": "division_exposure",
-  "title": "Division of Exposure",
-  "type": "categorical"
-},
-{
-  "key": "region_exposure",
-  "title": "Region of Exposure",
-  "type": "categorical"
-}
+      "key": "epiweek",
+      "title": "Epiweek (CDC)",
+      "type": "continuous"
+    },
+    {
+      "key": "QC_overall_score",
+      "title": "Nextclade QC score",
+      "type": "continuous"
+    },
+    {
+      "key": "QC_overall_status",
+      "title": "Nextclade QC status",
+      "type": "categorical"
+    },
+    {
+      "key": "reversion_mutations",
+      "title": "Reversion mutations",
+      "type": "continuous"
+    },
+    {
+      "key": "potential_contaminants",
+      "title": "Potential contaminants",
+      "type": "continuous"
+    },
+    {
+      "key": "rare_mutations",
+      "title": "Rare mutations",
+      "type": "continuous"
+    },
+    {
+      "key": "country_exposure",
+      "title": "Country of Exposure",
+      "type": "categorical"
+    },
+    {
+      "key": "division_exposure",
+      "title": "Division of Exposure",
+      "type": "categorical"
+    },
+    {
+      "key": "region_exposure",
+      "title": "Region of Exposure",
+      "type": "categorical"
+    }
   ],
   "geo_resolutions": [
     "location",
@@ -115,17 +170,22 @@
     "geo_resolution": "location",
     "map_triplicate": true,
     "branch_label": "clade",
-    "transmission_lines": false
+    "transmission_lines": true
   },
   "filters": [
     "recency",
     "clade_membership",
+    "emerging_lineage",
+    "pango_lineage",
+    "County",
     "location",
     "division",
     "country",
     "region",
     "author",
-    "pango_lineage"
+    "host",
+    "epiweek",
+    "QC_overall_status"
   ],
   "panels": [
     "tree",
