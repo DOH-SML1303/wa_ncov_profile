@@ -1,41 +1,26 @@
 # These parameters are only used by the `export_for_nextstrain` rule and shouldn't need to be modified.
 # To modify the s3 _source_ bucket, specify this directly in the `inputs` section of the config.
 # P.S. These are intentionally set as top-level keys as this allows command-line overrides.
-S3_DST_BUCKET: "bucket-location/ncov/data"
-S3_DST_COMPRESSION: "gz"
+S3_DST_BUCKET: "waphl-stephanie-lunn-bucket/ncov/data"
+S3_DST_COMPRESSION: "xz"
 S3_DST_ORIGINS: ["wa-seq"]
 upload:
   - build-files
 
 # Update input location as needed.
 inputs:
-  - name: wa-seq01
-    metadata: "s3://bucket-location/ncov/data/wa-sequences01.tar"
-    sequences: "s3://bucket-location/ncov/data/wa-sequences01.tar"
-  - name: wa-seq02
-    metadata: "s3://bucket-location/ncov/data/wa-sequences02.tar"
-    sequences: "s3://bucket-location/ncov/data/wa-sequences02.tar"
-  - name: wa-seq03
-    metadata: "s3://bucket-location/ncov/data/wa-sequences03.tar"
-    sequences: "s3://bucket-location/ncov/data/wa-sequences03.tar"
-  - name: wa-seq04
-    metadata: "s3://bucket-location/ncov/data/wa-sequences04.tar"
-    sequences: "s3://bucket-location/ncov/data/wa-sequences04.tar"
-#  - name: wa-seq05
-#    metadata: "s3://bucket-location/ncov/data/wa-sequences05.tar"
-#    sequences: "s3://bucket-location/ncov/data/wa-sequences05.tar"
+  - name: wa-seq
+    metadata: "s3://waphl-stephanie-lunn-bucket/ncov/data/wa-sequences.tar.xz"
+    sequences: "s3://waphl-stephanie-lunn-bucket/ncov/data/wa-sequences.tar.xz"
+#  - name: wa-seq02
+#    metadata: "s3://waphl-stephanie-lunn-bucket/ncov/data/wa-sequences02.tar"
+#    sequences: "s3://waphl-stephanie-lunn-bucket/ncov/data/wa-sequences02.tar"
   - name: contextual
-    metadata: "s3://bucket-location/ncov/data/hcov_north-america.tar.gz"
-    sequences: "s3://bucket-location/ncov/data/hcov_north-america.tar.gz"
+    metadata: "s3://waphl-stephanie-lunn-bucket/ncov/data/hcov_north-america.tar.gz"
+    sequences: "s3://waphl-stephanie-lunn-bucket/ncov/data/hcov_north-america.tar.gz"
   - name: references
     metadata: "data/references_metadata.tsv"
     sequences: "data/references_sequences.fasta"
-
-
-# Defines next align specs
-genes: ["ORF1a", "ORF1b", "S", "ORF3a", "M", "N"]
-use_nextalign: true
-conda_environment: "workflow/envs/nextstrain.yaml"
 
 # Define custom rules
 custom_rules:
@@ -72,6 +57,7 @@ subsampling:
       query: --query "(country == 'USA' & division == '{division}')"
     # Included to accurately reconstruct # of introductions
     contextual-proximity:
+      min_date: --min-date 2020
       max_sequences: 1500
       query: --query "contextual == 'yes'"
       priorities:
@@ -79,6 +65,7 @@ subsampling:
         focus: local-focus
     # Included for accurate clade timing
     contextual-random:
+      min_date: --min-date 2020
       max_sequences: 500
       group_by: "month year"
       query: --query "contextual == 'yes'"
@@ -87,9 +74,10 @@ subsampling:
     local-focus:
       min_date: --min-date {earliest_date}
       query: --query "(country == 'USA' & division == '{division}')"
-      max_sequences: 17000
+      #max_sequences: 17000
     # Included to accurately reconstruct # of introductions.
     contextual-proximity:
+      min_date: --min-date 2020
       max_sequences: 1000
       query: --query "contextual == 'yes'"
       priorities:
@@ -97,6 +85,7 @@ subsampling:
         focus: local-focus
     # Included for accurate clade timing.
     contextual-random:
+      min_date: --min-date 2020
       max_sequences: 500
       group_by: "month year"
       query: --query "contextual == 'yes'"
